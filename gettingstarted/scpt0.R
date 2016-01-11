@@ -50,4 +50,5 @@ source ("getData.R")
 
 
 downloadFile("https://cdph.data.ca.gov/api/views/ezms-cei8/rows.csv?accessType=DOWNLOAD","raw.csv")
-         
+
+
