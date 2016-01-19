@@ -1,3 +1,8 @@
 #!/usr/bin/env Rscript
 
-getVarNames <- function
+
+
+downloadData <- function(url){
+    cat (paste("Downloading from ...\n",url))
+}
+
