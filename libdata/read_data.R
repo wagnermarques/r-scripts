@@ -12,39 +12,20 @@ lineSeparator <- "--------------------------------------------------------------
 ## S O M E    D E F A U L T   V A L U E S
 ## 
 
-##File Names to open
-##fileNameTccGlauc <- "../data/plan-tcc-glaucia-040116.csv"
-fileNameTccGlauc <- "../data/plan-tcc-glaucia-040116CVS.csv"
-print("fileNameTccGlauc")
-print(fileNameTccGlauc)
-
-
-
 ##True if the name of the variables is in the first line of the file data
 headerFlag    <-   T   
-print("headerFlag")
-print(headerFlag)
 
 ##field separator character
 ## for tab separator use "/t"
 sepChar       <-  ";"  
-print("sepChar")
-print(sepChar)
 
 ##quote character for strings values  change to  "\"'"  for "
 quoteChar     <-  ""   
-print("quoteChar")
-print(quoteChar)
 
 ##decimal point separator char
 decChar       <-  "."
-print("decChar")
-print(decChar)
 
 numeralsVector <-  c("allow.loss", "warn.loss", "no.loss")
-print("numeralsVector")
-print(numeralsVector)
-
 
 ## A vector of row names.
 ## 1) A vector giving the actual row names,
@@ -52,15 +33,11 @@ print(numeralsVector)
 ## 3) or character string giving the name of the table column containing the row names.
 ## row.names = NULL forces row numbering.
 rowNames      <-  NULL
-print("rowNames")
-print(rowNames)
 
 ## a vector of optional names for the variables.
 ## The default is to use "V" followed by the column number.
 ## colNames      <- col.names
 colNames      <- NULL     	
-print("colNames")
-print(colNames)
 
 
 ## Default behavior of read.DIF is to convert character variables to factors.
@@ -101,6 +78,7 @@ print(colNames)
 #           dec = ".", fill = TRUE, comment.char = "", ...)
 
 #            dec = ",", fill = TRUE, comment.char = "", ...)
+
 dataTccGlauc <- read.csv(fileNameTccGlauc,headerFlag,sepChar)
 dta <- dataTccGlauc
 #print(lineSeparator)
@@ -108,7 +86,6 @@ dta <- dataTccGlauc
 #print(dataTccGlauc[1:10,1:4])
 #print(lineSeparator)
 
-print(lineSeparator)
 varNameToSampling <- "Inicio"
 print(c("S A M P L E  ",varNameToSampling))
 print(dataTccGlauc)

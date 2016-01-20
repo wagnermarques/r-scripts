@@ -1,8 +1,0 @@
-#!/usr/bin/env Rscript
-
-
-
-downloadData <- function(url){
-    cat (paste("Downloading from ...\n",url))
-}
-
