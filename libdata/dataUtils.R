@@ -1,8 +1,6 @@
 #!/usr/bin/env Rscript
-##cat(">>>> dataUtils.R loaded sucessfully...")
 
-
-downloaFileDestinationDir <<- "../data"
+downloaFileDestinationDir <<- paste(getwd(), "data", sep="/")
 
 lsDataDir <<- function(){
     print("-----------------------------------")
@@ -29,12 +27,15 @@ lsDataSetsInSession <- function(){
 ##compressedType (zip, rar, tar.gz...)
 ##if compressedType is diferent of null, the file is compressed and must be uncrompressed
 ##last parameter is a function that kwnows how to import the data
-downloadFromUrl <<- function(url,fileName){
-    ##https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html
+downloadDataFromUrl <<- function(url,fileName){
+    ##https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.htlm
     fileNameWithFullPath <- paste(downloaFileDestinationDir,fileName,sep="/")
     if(file.exists(fileNameWithFullPath)) {
         return(fileNameWithFullPath)
-    }else{        
+    }else{
+        print (paste("downloading ",fileNameWithFullPath))
+        print (paste("Url: ", url))
+        print (paste("fileNameWithFullPath: ",fileNameWithFullPath))
         download.file(url,
                       fileNameWithFullPath,
                       "auto",
