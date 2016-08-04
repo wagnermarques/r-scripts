@@ -1,0 +1,52 @@
+:root {
+    background-color:wite;
+}
+
+/*
+http://sergiolopes.org/css-box-sizing-border-box*/
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       box-sizing: border-box;
+}
+
+
+#main {
+    width : 90%;
+    height:600px;
+    margin : 0 auto;
+}
+
+#top {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+}
+
+#left {
+    float : left;
+    padding : 0;
+    width : 25%;
+    border-right:1px solid darkblue;
+}
+
+#content {
+    padding-top: 10px;
+    margin-left: 26%;
+
+}
+
+
+#footer {
+}
+
+#footer-fixed {
+    position: fixed;
+    bottom:0;
+    width:100%;
+    color:wite;
+    background-color:black;
+}

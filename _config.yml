@@ -1,0 +1,5 @@
+markdown: redcarpet
+baseurl: /r-scripts
+exclude: ['README.md']
+title: Some R-Scripts
+
