@@ -25,3 +25,4 @@ R_LIBS/*
 
 #data files
 data/*
+_site

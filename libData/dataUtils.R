@@ -1,6 +1,9 @@
 #!/usr/bin/env Rscript
 
-downloaFileDestinationDir <<- paste(getwd(), "data", sep="/")
+thisScriptFullPath <- dirname(sys.frame(1)$ofile)
+print(paste("[LOG]: loaded sucessfully" , thisScriptFullPath, sep=" => "))
+
+#downloaFileDestinationDir <<- paste(getwd(), "data", sep="/")
 
 lsDataDir <<- function(){
     print("-----------------------------------")
@@ -57,11 +60,11 @@ uncompressZipFile <- function(filePath){
               setTimes = FALSE)        
 }
 
-printVars <<- function(dtaObj){
-    print("SHOW VARS...")
-    vars <- names(dtaObj)
-    print(vars)
-}
+#printVars <<- function(dtaObj){
+#    print("SHOW VARS...")
+#    vars <- names(dtaObj)
+#    print(vars)
+#}
 
 
 

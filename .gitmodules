@@ -1,3 +1,3 @@
-[submodule "devel"]
-	path = devel
-	url = https://github.com/sjPlot/devel.git
+#[submodule "devel"]
+#	path = devel
+#	url = https://github.com/sjPlot/devel.git

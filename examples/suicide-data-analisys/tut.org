@@ -1,0 +1,15 @@
+    #+TITLE: Example Suicide cvs data
+    
+#+BEGIN_COMMENT 
+apenas um comentario nao é exportado
+#+END_COMMENT
+    
+
+
+
+
+
+
+
+
+    
