@@ -80,31 +80,57 @@ printVars <- function(dtaObj){
 
 generateXTableFilesThatPresentsDataReaded <- function(dtaObj,dtaReadedFileName){
     print("[LOG generateXTableFilesThatPresentsDataReaded <- function(dtaObj){...] Generating pdf of data readed");
-    print(paste("Saving output in currentOutDir",currentOutDir,sep=":"));
-    print(paste("dtaReadedFileName received",dtaReadedFileName,sep="="));
+    print(paste("[LOG generateXTableFilesThatPresentsDataReaded <- function(dtaObj){...]: Saving output in currentOutDir",currentOutDir,sep=":"));
+    print(paste("[LOG generateXTableFilesThatPresentsDataReaded <- function(dtaObj){...]: dtaReadedFileName received",dtaReadedFileName,sep="="));
     xtblObj <- xtable(dtaObj);
 
-    xtableGeneratedLatexFileName <-
-        paste(currentOutDir, paste("xtableLatext",dtaReadedFileName, sep="_"), sep="_");
-    xtableGeneratedLatexFileDotText <-
-        paste(currentOutDir, paste(xtableGeneratedLatexFileName,"tex",sep="."), sep="_");
 
-    xtableGeneratedHtmlFileName <-
-        paste(currentOutDir, paste("xtableHtml",dtaReadedFileName, sep="_"), sep="_");
+    ##just to compose the final filename of latex table exported and final fine of html file name 
 
+    ##first, latex filename
+    #xtableGeneratedLatexFileName <-
+    #    paste(currentOutDir, paste("xtableLatext",dtaReadedFileName, sep="_"), sep="_");
+    #xtableGeneratedLatexFileDotTex <-
+    #    paste(currentOutDir, paste(xtableGeneratedLatexFileName,"tex",sep="."), sep="_");
+    xtableGeneratedLatexFileDotTex <- "xtableLatextTable.tex";
+
+    ##and the html filename
+    #xtableGeneratedHtmlFileName <-
+    #    paste(currentOutDir, paste("xtableHtml",dtaReadedFileName, sep="_"), sep="_");
+    xtableGeneratedHtmlFileName <- "xtableHtmlTable.html";
+    
+    ##ok, now generating the files...
+    
     ##print.xtable(xtblObj, type="latex", file="filename.tex");
     ##print.xtable(xtblObj, type="latex", file="filename.tex");
     print.xtable(
         xtblObj, type="Latex",
-        file=paste(currentOutDir,xtableGeneratedLatexFileDotText, sep="/"));
+        file=paste(currentOutDir,xtableGeneratedLatexFileDotTex, sep="/"));
     #pdftolatex(xtableGeneratedLatexFileDotText,currentOutDir);
-    #print.xtable(
-    #    xtblObj, type="html",
-    #    file=paste(currentOutDir,xtableGeneratedHtmlFileName,sep="/"));
+
+    print.xtable(
+        xtblObj, type="html",
+        file=paste(currentOutDir,xtableGeneratedHtmlFileName,sep="/"));
     
-    #pdftolatex(xtableGeneratedLatexFileName,currentOutDir);
+    ##pdftolatex(xtableGeneratedLatexFileName,currentOutDir);
+
+    ##Now we need to compose string command to pass to the system to generate pdf from latex fragmente
+    FullPathToCurrentOutDir <-  enclosePathWithSingleQuote(paste(pathForRScriptsWorkspace, currentOutDir, sep="/"));
+    ChangeDirTO_FullPathToCurrentOutDir = paste("cd", FullPathToCurrentOutDir);
+    pdflatexShellScriptPath <- enclosePathWithSingleQuote(paste(pathForRScriptsWorkspace,"util/pdflatext_tex_fragment.sh", sep="/"));
+
+    ChangeDirTO_FullPathToCurrentOutDir_andLaunch_pdflatexShellScriptPath_FullPathToCurrentOutDir_xtableGeneratedLatexFileDotTex <- paste(ChangeDirTO_FullPathToCurrentOutDir,
+             paste(paste(pdflatexShellScriptPath,FullPathToCurrentOutDir),xtableGeneratedLatexFileDotTex), sep=" && ");
+    print(ChangeDirTO_FullPathToCurrentOutDir_andLaunch_pdflatexShellScriptPath_FullPathToCurrentOutDir_xtableGeneratedLatexFileDotTex)
+    system(ChangeDirTO_FullPathToCurrentOutDir_andLaunch_pdflatexShellScriptPath_FullPathToCurrentOutDir_xtableGeneratedLatexFileDotTex);
+    #system(paste(ChangeDirTO_FullPathToCurrentOutDir, " && pwd"));
+    
 }
 
-
+enclosePathWithSingleQuote <- function(path){
+    pathWithFirstSingleQuote <- paste("'", path, sep="");
+    pathEnclosedWithSingleQuote <- paste(pathWithFirstSingleQuote, "'", sep="");
+    return(pathEnclosedWithSingleQuote);
+}
 
 
