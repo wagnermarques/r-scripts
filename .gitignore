@@ -1,6 +1,9 @@
 #https://github.com/github/gitignore/blob/master/R.gitignore
 
 *~
+*.#
+*#
+Output_*
 *.csv
 
 # History files

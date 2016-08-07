@@ -1,0 +1,267 @@
+readODS needs as a dependencies 
+dnf install libcurl-devel
+dnf install libxml2-devel
+
+#+BEGIN_SRC
+#+END_SRC
+
+Lets see what data files we have
+The r-script watch for r-script/data directory to use data
+So list-data command just list this directory
+
+#+BEGIN_SRC
+./Run.R list-data
+#+END_SRC
+
+List data in session
+This command run data() function
+
+#+BEGIN_SRC
+./Run.R data-in-session
+#+END_SRC
+
+read-data
+#+BEGIN_SRC
+./Run.R read-data
+#+END_SRC
+
+
+output folder is for generated artifact from runing script and its options/swiches
+
+* SOME BASIC R STUFFS TO REMEMBER
+> foo <- TRUE
+> class(foo)
+[1] "logical"
+ if (yes){print("test return true")}
+[1] "test return true"
+> if (NO){print("test return true")}
+> if (yes && NO){print("test return true")}
+> if (NO && yes){print("test return true")}
+> if (NO || yes){print("test return true")}
+[1] "test return true"
+
+STRINGS
+
+> print(lang.domain)
+[1] "STATISTICS"
+> # retrieves substring from first character to fourth character
+> substr(lang.domain, 1, 4)
+[1] "STAT"
+> gsub("I", "1", lang.domain) # substitutes every "I" for "1"
+[1] "STAT1ST1CS"
+# combines character strings
+> paste("R does", lang.domain, "!!!")
+[1] "R does STATISTICS !!!"
+
+
+VECTOR
+
+> our.vect <- c(8, 6, 7, 5, 3, 0, 9)
+> our.vect
+[1] 8 6 7 5 3 0 9
+
+> length(our.vect)
+[1] 7
+> our.vect[length(our.vect)]
+# get the last element of a vector
+[1] 9
+
+> our.vect[10]
+[1] NA
+
+> # extract the first, third, fifth, and
+> # seventh element from our vector
+> our.vect[c(1, 3, 5, 7)]
+[1] 8 7 3 9
+
+sequences.
+> other.vector <- 1:10
+> other.vector
+[1] 1 2 3 4 5 6 7 8 9 10
+> another.vector <- seq(50, 30, by=-2)
+> another.vector
+[1] 50 48 46 44 42 40 38 36 34 32 30
+
+
+Vectorized functions
+
+These vectorized functions are usually extremely fast and efficient. We've
+already seen one such function, length() , but there are many many others.
+> # takes the mean of a vector
+> mean(our.vect)
+[1] 5.428571
+> sd(our.vect)
+# standard deviation
+[1] 3.101459
+> min(our.vect)
+[1] 0
+> max(1:10)
+[1] 10
+> sum(c(1, 2, 3))
+[1] 6
+
+
+lues in vectors:
+> messy.vector <- c(8, 6, NA, 7, 5, NA, 3, 0, 9)
+> messy.vector
+[1] 8 6 NA 7 5 NA 3 0 9
+> length(messy.vector)
+[1] 9
+Some vectorized functions will not allow NA values by default. In these cases, an
+extra keyword argument must be supplied along with the first argument to the
+function.
+> mean(messy.vector)
+[1] NA
+> mean(messy.vector, na.rm=TRUE)
+[1] 5.428571
+> sum(messy.vector, na.rm=FALSE)
+[1] NA
+> sum(messy.vector, na.rm=TRUE)
+[1] 38
+
+
+> 
+> messy.vector <- c(8, 6, NA, 7, 5, NA, 3, 0, 9)
+> is.na(messy.vector)
+[1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE
+> 
+
+
+> sum(is.na(messy.vector))
+[1] 2
+
+Advanced subsetting
+
+ 
+> messy.vector[!is.na(messy.vector)]
+[1] 8 6 7 5 3 0 9
+
+
+
+> our.vect[our.vect > 5]
+[1] 8 6 7 9
+
+Sometimes, it may be required to replace all the NA values in a vector with the value
+0 . To do that with our messy vector, we can execute the following command:
+> messy.vector[is.na(messy.vector)] <- 0
+> messy.vector
+[1] 8 6 0 7 5 0 3 0 9
+
+
+
+> messy.vector[is.na(messy.vector)] <- 0
+> messy.vector
+[1] 8 6 0 7 5 0 3 0 9
+
+
+Recycling
+> our.vect + 3
+> our.vect + c(3, 3, 3, 3, 3, 3, 3)
+> our.vect[c(TRUE, FALSE)]
+[1] 9 7 3 9
+
+sapply() takes a vector and a function as its argument. It then applies the function
+to every element and returns a vector of results. We can use sapply() in this manner
+to find out which digits in Jenny's phone number are even:
+> sapply(our.vect, is.even)
+[1] FALSE TRUE FALSE FALSE FALSE
+TRUE FALSE
+
+> sapply(our.vect, function(num){is.divisible.by(num, 3)})
+[1] TRUE TRUE FALSE FALSE TRUE TRUE TRUE
+
+Matrices
+One way of creating a matrix is to just supply a vector to the function matrix() .
+> a.matrix <- matrix(c(1, 2, 3, 4, 5, 6))
+> a.matrix
+a.matrix <- matrix(c(1, 2, 3, 4, 5, 6), ncol=2)
+a2.matrix <- cbind(c(1, 2, 3), c(4, 5, 6))
+
+ 
+> a2.matrix <- cbind(c(1, 2, 3), c(4, 5, 6))
+> a2.matrix
+     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6
+
+
+> colSums(a2.matrix)
+[1] 6 15
+> rowMeans(a2.matrix)
+[1] 2.5 3.5 4.5
+
+
+If vectors have sapply() , then matrices have apply() . The preceding two functions
+could have been written, more verbosely, as:
+> apply(a2.matrix, 2, sum)
+[1] 6 15
+> apply(a2.matrix, 1, mean)
+[1] 2.5 3.5 4.5
+where 1 instructs R to perform the supplied function over its rows, and 2, over its
+columns.
+The matrix multiplication operator in R is %*%
+> a2.matrix %*% a2.matrix
+Error in a2.matrix %*% a2.matrix : non-conformable arguments
+
+
+> mtx1 <- cbind(c(0,1),c(1,0))
+> mtx1 %*% mtx1
+     [,1] [,2]
+[1,]    1    0
+[2,]    0    1
+> mtx1 <- cbind(c(2,2),c(2,2))
+> mtx1 %*% mtx1
+     [,1] [,2]
+[1,]    8    8
+[2,]    8    8
+> 
+
+
+
+
+> dim(a2.matrix)
+[1] 3 2
+
+
+To index the element of a matrix at the second row and first column, you need to
+supply both of these numbers into the subscripting operator.
+> a2.matrix[2,1]
+[1] 2
+
+
+
+> # give me element in column 2 at the first and third row
+> a2.matrix[c(1, 3), 2]
+[1] 4 6
+
+
+Loading data into R
+
+flavor,number
+pistachio,6
+mint chocolate chip,7
+vanilla,5
+chocolate,10
+strawberry,2
+neopolitan,4
+
+This data represents the number of students in a class that prefer a particular flavor
+of soy ice cream. We can read the file into a variable called favs as follows:
+
+> favs <- read.table("favorites.txt", sep=",", header=TRUE)
+
+If you get an error that there is no such file or directory, give R the full path name to
+your data set or, alternatively, run the following command:
+
+> favs <- read.table(file.choose(), sep=",", header=TRUE)
+Other common data formats have values separated by tabs and pipes ( "|" ).
+The value of sep should then be "\t" and "|" , respectively.
+
+> favs <- read.csv("favorites.txt")
+
+> favs <- read.csv("favorites.txt", stringsAsFactors=FALSE)
+> class(favs$flavor)
+[1] "character"
+
+

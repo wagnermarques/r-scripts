@@ -1,14 +1,7 @@
 #!/usr/bin/env Rscript
 cat("suicide-data-analisys.R loaded sucessfully\n")
 print (pathForRScriptsWorkspace)
-##gets the workspace dir for this script
-#print(getwd())
 
-##change workspace dir to r-script
-#setwd("../../")
-
-##checks it out
-#print(getwd())
 
 ##now is possible to load some scripts
 ##just notice that the workspace dir now

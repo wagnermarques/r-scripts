@@ -43,8 +43,10 @@ pathToSjPlotFileToInstall <- paste(pathForRScriptsWorkspace,"devel/R", sep="/");
 ##https://github.com/chainsawriot/readODS/
 
 listOfPackagesToBeInstalledFromCPAN <- c(
-    "RCurl","stringr","labeling","mime","scales","RColorBrewer",
+    "RCurl",
+    "stringr","labeling","mime","scales","RColorBrewer",
     "ggplot2", "sjmisc" ,"sjPlot", "Rcpp",
+    "xtable",
     #xtable: Export Tables to LaTeX or HTML
     "xtable",
     #vcd: Visualizing Categorical Data
@@ -55,7 +57,7 @@ listOfPackagesToBeInstalledFromCPAN <- c(
     #"RJSONIO", #RJSONIO: Serialize R objects to JSON, JavaScript Object Notation
     #Provides comprehensive functionality to read, write and format Excel data. (depends of rjava)
     #"XLConnect",
-    #"readODS",   #read ODS files into R as data.frames
+    "readODS",   #read ODS files into R as data.frames
     "RSQLite",
     "DBI");
 
@@ -78,7 +80,11 @@ isPackageInstalled <- function(pkg){
 
 installPackagesIfNotInstalledYet(listOfPackagesToBeInstalledFromCPAN);
 
-##this package is almost allways needed,
-##so, its loaded just here and the other just when its needs for
+##TODO, REFACTORING TO LOAD PKGS ONLY AS NEEDED
 library(stringr);
-#library(readODS); rjava
+library(readODS);
+library(sjPlot) ;
+library(sjmisc);
+library(xtable);
+options(xtable.floating = FALSE)
+options(xtable.timestamp = "")
