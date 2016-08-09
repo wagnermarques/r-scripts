@@ -61,6 +61,9 @@ listOfPackagesToBeInstalledFromCPAN <- c(
     "RSQLite",
     "DBI");
 
+options(xtable.floating = FALSE)
+options(xtable.timestamp = "")
+
 installPackagesIfNotInstalledYet <- function(listOfPackagesToBeInstalledFromCPAN){
     ##thanks Juan Antonio Cano http://stackoverflow.com/questions/4090169/elegant-way-to-check-for-missing-packages-and-install-them
     for(library in listOfPackagesToBeInstalledFromCPAN) { 
@@ -86,5 +89,20 @@ library(readODS);
 library(sjPlot) ;
 library(sjmisc);
 library(xtable);
-options(xtable.floating = FALSE)
-options(xtable.timestamp = "")
+
+options(xtable.floating = TRUE);
+options(xtable.timestamp = "");
+
+options(xtable.only.contents = FALSE);
+options(xtable.add.to.row = NULL);
+options(xtable.math.style.negative = FALSE);
+options(xtable.math.style.exponents = FALSE);
+options(xtable.html.table.attributes = "border=10");
+
+
+options(xtable.include.rownames =  TRUE);
+options(xtable.include.colnames =  TRUE);
+#options(xtable.hline.after = c(-1,0,4,8));
+
+##http://stackoverflow.com/questions/31024961/line-breaks-in-xtable-cells?rq=1
+options(xtable.sanitize.text.function=identity)

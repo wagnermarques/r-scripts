@@ -1,7 +1,9 @@
-readODS needs as a dependencies 
+readODS needs these packages as a dependencies 
 dnf install libcurl-devel
 dnf install libxml2-devel
 
+texlive (latex) needs...
+dnf install texlive-collection-langportuguese texlive-collection-langcyrillic.noarch
 #+BEGIN_SRC
 #+END_SRC
 

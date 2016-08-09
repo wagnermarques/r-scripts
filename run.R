@@ -25,14 +25,15 @@ handleScriptArgs <-function(args){
     currentOutDir <<- createCurrentOutputDirThisExecution();
 
     if (length(args)==0) {
-        usage();
-        stop("Please provide read usage.n", call.=FALSE)
+        handleWithNoArgs();
+        ##stop("Please read usage message", call.=FALSE)
     } else if (length(args)==1) {
         singleArgHandle(args);
     }else if (length(args)==2){
         twoArgHandle(args);
     }
 }
+
 
 runSampleSuicideDataAnalisys <- function(){
     cmd  <- "./examples/suicide-data-analisys/suicide-data-analisys.R"
@@ -43,12 +44,15 @@ runSampleSuicideDataAnalisys <- function(){
               
 }
 
+
 usage <- function(){
     message ("USAGE: change to r-script dir, ./run.R arg1 arg2 arg3");
     message ("./run.R list-data to list data files ir data dir")
 }
 
-
+handleWithNoArgs <- function(){
+    ##usage();
+}
 
 singleArgHandle <- function(args){
     arg <- args ##args with one is not a vector, so lets call it arg 
@@ -80,8 +84,8 @@ twoArgHandle <- function(args){
             header=TRUE,
             stringsAsFactors=TRUE);
         
-        printVars(tbl);
-        print(head(tbl));
+        ##printVars(tbl);
+        ##print(head(tbl));
         generateXTableFilesThatPresentsDataReaded(tbl,dataToReadFileName);
        
     }else{
