@@ -5,13 +5,14 @@ my R scripts
 The goal is use R as a command line style, like examples below.
 I'm using linux so for windows users may try but....
 
-I'm working in my spare time and was started to learn R. Let code togheter?
+I'm working in my spare time and was started this project to learn R. Let code togheter?
 
-The firt goas is provide some descriptive statistics with nice outputs.
+The firt goal is to provide some descriptive statistics with nice
+outputs.
 
 
 ## Installation
-if you in fedora, like me: (TODO for other distros and windows) 
+if you use fedora, like me: (TODO for other distros and windows) 
 
 First things first....
 ```r
@@ -20,7 +21,23 @@ dnf update -y
 
 ```r
 dnf install -y R texlive-scheme-full
+
 dnf install R-RCurl -y
+
+dnf install libcurl-devel
+dnf install libxml2-devel
+
+dnf install libreoffice (to generate final output in odt file)
+
+dnf install latex2html (its a interesting option if you have no spaces
+in directory)
+
+dnf install pandoc (a option to convert latex file to final output)
+
+dnf install texlive-tex4ht
+
+dnf install latex2rtf (another option, not works for me, but is a option)
+
 ```
 The "R" is for R 
 The  "texlive-scheme-full" is for to export pdf from latex (TODO)
@@ -36,11 +53,18 @@ git submodule update --recursive --remote
 
 ```r
 cd r-script 
-./run.R (without parameter, so that in a very first time the script
-can install the R packages to use)
-
-./run.R samples suicide-data-analisys
+./run.R read-data pesq-abandono-etec211-bk.ods
 ```
+
+## To produce final output with xtables in html and in odt:
+1. Use the terminal
+2. change to r-script/util
+3. Run ./produce_final_output.sh script and pass the last ouptut
+   directory of last r-script execution (./run.R read-data
+   pesq-abandono-etec211-bk.ods)
+
+
+
 The "samples" "suicide-data-analisys" witches is to say... run the
 "suicide-data-analisys" sample analisys from default script "samples".
 
