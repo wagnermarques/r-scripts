@@ -12,17 +12,12 @@ touch "$tempCompleteLatexFile";
 
 #printf   "\documentclass{minimal}\n"  >> "$tempCompleteLatexFile"; DONT DEFINE TABLES
 #printf   "\documentclass{report}\n"  >> "$tempCompleteLatexFile";
-#printf   "\documentclass[twocolumn]{article}\n"  >> "$tempCompleteLatexFile";
 printf   "\documentclass{article}\n"  >> "$tempCompleteLatexFile";
-#printf   "\documentclass{book}\n"  >> "$tempCompleteLatexFile";
-
-
-printf   "\usepackage{longtable}" >> "$tempCompleteLatexFile";
-#printf   "\usepackage[portuguese]{babel}" >> "$tempCompleteLatexFile";
+printf   "\usepackage[portuguese]{babel}" >> "$tempCompleteLatexFile";
 ## not needed with fedora because its already utf8 configured printf   "\usepackage[utf8]{inputenc}" >> "$tempCompleteLatexFile";
-#printf   "\usepackage[T1]{fontenc}" >> "$tempCompleteLatexFile";
+printf   "\usepackage[T1]{fontenc}" >> "$tempCompleteLatexFile";
 
-#printf "\usepackage{lmodern}\n"       >> "$tempCompleteLatexFile";
+printf "\usepackage{lmodern}\n"       >> "$tempCompleteLatexFile";
 printf   "\\\begin{document}\n"           >> "$tempCompleteLatexFile"
 cat "$texFramgmentFilePath"           >>  "$tempCompleteLatexFile";
 printf  "\\\end{document}\n"             >> "$tempCompleteLatexFile";

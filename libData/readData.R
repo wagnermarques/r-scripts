@@ -1,44 +1,95 @@
 #!/usr/bin/env Rscript
+
+##-------------lOGIN SOMETHING
+thisScriptFullPath <- dirname(sys.frame(1)$ofile)
+print(paste("[LOG]: loaded sucessfully" , thisScriptFullPath, sep=" => "))
+##-------------
+
 ##https://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html
-
-## converts input from the old
-##    West-European encoding ISO-8859-1 to Unicode.
-##iconv -f ISO-8859-1 -t UTF-8 fileNameTccGlauc > fileNameTccGlaucIsoUtf8
-options(encoding = 'iso-8859-1')
-lineSeparator <- "-------------------------------------------------------------------"
+##pay attentions for some important options
+##and change accordingle
+##decChar       <-  "."
+##sepChar       <-  ";"
+##headerFlag    <-   T
+##rowNames      <-  NULL
+##colNames      <- NULL 
+setRScriptDefaultReadOptions <- function(){
+    print("[LOG setRScriptDefaultReadOptions <- function(){...] running...");
+    ## converts input from the old
+    ##    West-European encoding ISO-8859-1 to Unicode.
+    ##iconv -f ISO-8859-1 -t UTF-8 fileNameTccGlauc > fileNameTccGlaucIsoUtf8
+    options(encoding = 'iso-8859-1')
+    lineSeparator <- "-------------------------------------------------------------------"
 	
+    ##
+    ## S O M E    D E F A U L T   V A L U E S
+    ## 
 
-##
-## S O M E    D E F A U L T   V A L U E S
-## 
+    ##True if the name of the variables is in the first line of the file data
+    headerFlag    <-   T   
+    
+    ##field separator character
+    ## for tab separator use "/t"
+    sepChar       <-  ";"  
 
-##True if the name of the variables is in the first line of the file data
-headerFlag    <-   T   
+    ##quote character for strings values  change to  "\"'"  for "
+    quoteChar     <-  ""   
 
-##field separator character
-## for tab separator use "/t"
-sepChar       <-  ";"  
+    ##decimal point separator char
+    decChar       <-  "."
 
-##quote character for strings values  change to  "\"'"  for "
-quoteChar     <-  ""   
+    numeralsVector <-  c("allow.loss", "warn.loss", "no.loss")
 
-##decimal point separator char
-decChar       <-  "."
+    ## A vector of row names.
+    ## 1) A vector giving the actual row names,
+    ## 2) or a single number giving the column of the table which contains the row names,
+    ## 3) or character string giving the name of the table column containing the row names.
+    ## row.names = NULL forces row numbering.
+    rowNames      <-  NULL
 
-numeralsVector <-  c("allow.loss", "warn.loss", "no.loss")
+    ## a vector of optional names for the variables.
+    ## The default is to use "V" followed by the column number.
+    ## colNames      <- col.names
+    colNames      <- NULL     	
+}
 
-## A vector of row names.
-## 1) A vector giving the actual row names,
-## 2) or a single number giving the column of the table which contains the row names,
-## 3) or character string giving the name of the table column containing the row names.
-## row.names = NULL forces row numbering.
-rowNames      <-  NULL
+factorVariablesConfigFunction <- function(cVarsThatWillBeFactor){
+    print("[LOG factorVariablesConfigFunction <- function(cVarsThatWillBeFactor){...] running...");
+    dta$Sexo <- factor(dta$Sexo,levels=c(1,2),labels=c("Masculino","Feminino"))
+}
 
-## a vector of optional names for the variables.
-## The default is to use "V" followed by the column number.
-## colNames      <- col.names
-colNames      <- NULL     	
 
+readData <- function(fileType = NULL,
+                     fileName = NULL,
+                     sheet=1,
+                     colNamesToRead = NULL,
+                     readOptionConfigFunction = NULL,
+                     factorVariablesConfigFunction = NULL,
+                     numericVariablesConfiguration = NULL){
+    
+    filePath <- paste(pathForRScriptDataDir,fileName,sep="/");
+    print(paste("[LOG: readData.R] reading file ",filePath));
+    readOptionConfigFunction();
+    
+    dtaObj <- NULL;
+    if( fileType == "ods"){
+        dtaObj <- read_ods(filePath,    
+                           sheet = 1);
+        factorVariablesConfigFunction(dtaObj);
+        return(dtaObj);
+    }else if( fileType == "csv"){
+        dtaObj <- fread(filePath, select = colNamesToRead);
+        colnames(dtaObj);
+        colnames(dtaObj);
+        colnames(dtaObj);
+        factorVariablesConfigFunction(dtaObj);
+        return(dtaObj);
+    }else{
+        message("[ERROR readData.R]: please provide valid fileType parameter for readData(fileType function");
+        message(paste("[ERROR readData.R]: fileType parameters not valid: ",fileType)); 
+    }
+    
+}##readData func
 
 ## Default behavior of read.DIF is to convert character variables to factors.
 ## The variable as.is controls the conversion of columns not otherwise specified by colClasses.
@@ -78,19 +129,17 @@ colNames      <- NULL
 #           dec = ".", fill = TRUE, comment.char = "", ...)
 
 #            dec = ",", fill = TRUE, comment.char = "", ...)
-readCsv <- function(fileName){
-    fullPathFileName <- paste(downloaFileDestinationDir,fileName,sep = "/")
-    dtaObj <- read.csv(fullPathFileName);
-    return(dtaObj);
-}
+#readCsv <- function(fileName){
+#    fullPathFileName <- paste(downloaFileDestinationDir,fileName,sep = "/")
+#    dtaObj <- read.csv(fullPathFileName);
+#    return(dtaObj);
+#}
 
-varNameToSampling <- "Inicio"
-print(c("S A M P L E  ",varNameToSampling))
-dtaVariablesNames <- function(dtaObj){
-    vars <- names(dataTccGlauc)
-    
-}
+#varNameToSampling <- "Inicio"
+#print(c("S A M P L E  ",varNameToSampling))
+#dtaVariablesNames <- function(dtaObj){
+#    vars <- names(dataTccGlauc)
+#    
+#}
 
-dtaConfigFactorVariables <- function(cVarsThatWillBeFactor){
-    dta$Sexo <- factor(dta$Sexo,levels=c(1,2),labels=c("Masculino","Feminino"))
-}
+
