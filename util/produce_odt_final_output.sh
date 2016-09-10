@@ -10,6 +10,7 @@ touch $outputTexFileName
 
 insertTexPreambule(){
     #https://bugs.launchpad.net/ubuntu/+source/tex-common/+bug/775546
+    printf   "\usepackage{longtable}" >> "$outputTexFileName";
     printf   '\\documentclass{article}\n'  >> "$outputTexFileName";
     printf   '\\usepackage[portuguese]{babel}\n' >> "$outputTexFileName";
     printf   '\\usepackage[T1]{fontenc}\n' >> "$outputTexFileName";
@@ -31,7 +32,7 @@ insertFinalTexToFinishOutputTexFile(){
 }
 
 produce_final_output_html_file(){
-
+    echo "produce_final_output_html_file(){..."
     #pandoc -s $outputTexFileName -o ouput.odt
     #pandoc $outputTexFileName -o ouputOpenOffice.odt
     htlatex $outputTexFileName
