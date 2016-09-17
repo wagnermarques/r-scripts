@@ -1,7 +1,38 @@
+
+cut(x,3,labels=c("low","medium","h
+igh"))
+
+cut(x,breaks=quan
+tile(x,c(0,.25,.50,.75,1)),
++ labels=c("Q1","Q2
+","Q3","Q4"),include.lowest=TRUE)
+[1]
+Q2 Q2 Q3 Q4 Q2 Q1 Q1 Q2 Q3 Q4 Q1 Q1 Q3 Q4 Q4
+Levels:
+Q1 Q2 Q3 Q4
+
+
+dnf install libreoffice (to generate final output)
+dnf install latex2html
+dnf install pandoc
+
+Needed to generate final html output
+dnf install texlive-tex4ht
+dnf install latex2rtf
+
 readODS needs these packages as a dependencies 
 dnf install libcurl-devel
 dnf install libxml2-devel
 
+_To produce final output with xtables in html and in odt:_
+1. Use the terminal
+2. change to r-script/util
+3. Run ./produce_final_output.sh script and pass the last ouptut
+   directory of last r-script execution (./run.R read-data
+   pesq-abandono-etec211-bk.ods)
+
+
+[wagner@localhost util]$ ./produce_final_output.sh '/run/media/wagner/Seagate Expansion Drive/wagnerdocri@gmail.com2/envs/env-dev/sources/r-scripts/Output_09_Ago_2016_19:11:33'
 texlive (latex) needs...
 dnf install texlive-collection-langportuguese texlive-collection-langcyrillic.noarch
 #+BEGIN_SRC

@@ -1,6 +1,6 @@
 # r-scripts
 
-my R scripts
+my R scripts, started to lern R.
 
 The goal is use R as a command line style, like examples below.
 I'm using linux so for windows users may try but....
@@ -15,6 +15,7 @@ outputs.
 if you use fedora, like me: (TODO for other distros and windows) 
 
 First things first....
+
 ```r
 dnf update -y 
 ```
@@ -54,7 +55,16 @@ git submodule update --recursive --remote
 ```r
 cd r-script 
 ./run.R read-data pesq-abandono-etec211-bk.ods
+
 ```
+and to generate final .odt file, copy the r-script output directory
+automatically generated at each run.R command issued and pass to
+procude-openoffice-output subcomand 
+```r
+[wagner@localhost r-scripts]$ ./run.R produce-openoffice-output Output_10_Set_2016_19:00:22
+```
+
+
 
 ## To produce final output with xtables in html and in odt:
 1. Use the terminal

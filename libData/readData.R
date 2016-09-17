@@ -78,8 +78,22 @@ readData <- function(fileType = NULL,
         factorVariablesConfigFunction(dtaObj);
         return(dtaObj);
     }else if( fileType == "csv"){
-        dtaObj <- fread(filePath, select = colNamesToRead);
-        colnames(dtaObj);
+        print("[LOG readData.R]: }else if( fileType == \"csv\"){...");
+
+        ##data.table TRUE returns a data.table. FALSE returns a data.frame.
+        dtaObj <- fread(filePath, select = colNamesToRead, data.table=TRUE);
+
+        message(paste("typeof(dtaObj) =",typeof(dtaObj)));
+        message(paste("class(dtaObj)=",class(dtaObj)));
+        message(paste("attributes(dtaObj)=",attributes(dtaObj)));
+        message(paste("colnames(dtaObj)",colnames(dtaObj)));
+        message(paste("typeof(colnames(dtaObj))",typeof(colnames(dtaObj))));
+        message(paste("names(dtaObj)=",names(dtaObj)));
+        message("Tables in memory...")
+        message(tables());
+
+        message("Tipo das variaveis em dtaObj...");
+        message(sapply(dtaObj,class));
         colnames(dtaObj);
         colnames(dtaObj);
         factorVariablesConfigFunction(dtaObj);
@@ -88,7 +102,7 @@ readData <- function(fileType = NULL,
         message("[ERROR readData.R]: please provide valid fileType parameter for readData(fileType function");
         message(paste("[ERROR readData.R]: fileType parameters not valid: ",fileType)); 
     }
-    
+
 }##readData func
 
 ## Default behavior of read.DIF is to convert character variables to factors.

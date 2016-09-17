@@ -195,7 +195,7 @@ outputRowDataInXTable <- function(dtaObj,dtaReadedFileName,colsPerTexFile){
     xtableGeneratedLatexFileName <- paste(dtaReadedFileName,"tex", sep=".");
     print.xtable(
         xtblObj, type="Latex",
-        tabular.environment="longtable",
+        #tabular.environment="longtable",
         add.to.row = list(pos=list(c(-1,0,nrow(dtaObj))), command="\\hline \n"),
         file=paste(currentOutDir,xtableGeneratedLatexFileName, sep="/"));
 

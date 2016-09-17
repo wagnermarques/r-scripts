@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
-##-------------lOGIN SOMETHING
+##-------------lOGGIN SOMETHING
 thisScriptFullPath <- dirname(sys.frame(1)$ofile)
 print(paste("[LOG]: loaded sucessfully" , thisScriptFullPath, sep=" => "))
-print(paste("[LOG]: Using Rpackages dir for packages installations:", pathToRPackages,sep="="))
+print(paste("[LOG]: Using Rpackages dir for packages installations:", pathToRPackagesDir,sep="="))
 ##-------------
 
 
@@ -44,9 +44,12 @@ pathToSjPlotFileToInstall <- paste(pathForRScriptsWorkspace,"devel/R", sep="/");
 
 listOfPackagesToBeInstalledFromCPAN <- c(
     "RCurl",
-    "stringr","labeling","mime","scales","RColorBrewer",
+    "data.table",
+    #"stringr",
+    "labeling","mime","scales","RColorBrewer",
     "ggplot2", "sjmisc" ,"sjPlot", "Rcpp",
     "xtable",
+    "data.table",
     #xtable: Export Tables to LaTeX or HTML
     "xtable",
     #vcd: Visualizing Categorical Data
@@ -84,11 +87,12 @@ isPackageInstalled <- function(pkg){
 installPackagesIfNotInstalledYet(listOfPackagesToBeInstalledFromCPAN);
 
 ##TODO, REFACTORING TO LOAD PKGS ONLY AS NEEDED
-library(stringr);
+#library(stringr);
 library(readODS);
 library(sjPlot) ;
 library(sjmisc);
 library(xtable);
+library(data.table);
 
 options(xtable.floating = TRUE);
 options(xtable.timestamp = "");

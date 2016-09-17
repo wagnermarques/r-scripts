@@ -1,22 +1,28 @@
 #!/usr/bin/env Rscript
-
-
 descriptiveStatisticsAsFactorVar <- function(dtaObj,factorVariablesNames){
 
     print("[LOG [descriptiveStatisticsAsFactorVar <- function(dtaObj,factorVariablesNames){...]");
 
     for( var in factorVariablesNames){
         varObj <- dtaObj[[var]];
-        varObj.freq <- table(varObj);
+
+
+        tblFactorOfVarObj <- table(varObj);
+        #order(tblFactorOfVarObj$varObj);
+        tblFactorOfVarObj <- transform(
+            tblFactorOfVarObj,
+            relPerc = prop.table(Freq),
+            cumFreq = cumsum(Freq))
 
         ##varObj.freq.AsFrame =  as.data.frame(varObj.freq);
         #varObj.freq.AsFrame =  table(varObj);
 
         ##varNameEnclosedBySingleQuote = paste(paste("'",varNome, sep=""), "'", sep="");
         ##setnames(varObj.freq.AsFrame, old=c("varObj","Freq"), new=c(varName,"Contagem"));
-        #print(varObj.freq.AsFrame);
-
-        xtbVar <- xtable(varObj.freq);
+                                        #print(varObj.freq.AsFrame);
+        
+        xtbVar <- xtable(tblFactorOfVarObj);
+        
         ##xtbVar <- xtable(varObj.freq.AsFrame, align=c("ccc"));
         ##xtbVar <- xtableFtable(varObj.freq.AsFrame, method = "compact"); Error in rep(" ", nrow(x) + 2) : argumento 'times' inválido
     

@@ -2,6 +2,7 @@
 
 *~
 *.#
+.#
 *#
 Output_*
 *.csv
@@ -29,3 +30,6 @@ R_LIBS/*
 #data files
 data/*
 _site
+
+#q.log is generated from texlive 
+*.log
