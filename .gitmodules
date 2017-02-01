@@ -1,3 +1,6 @@
 #[submodule "devel"]
 #	path = devel
 #	url = https://github.com/sjPlot/devel.git
+[submodule "hadleyverse"]
+	path = hadleyverse
+	url = https://github.com/rocker-org/hadleyverse.git

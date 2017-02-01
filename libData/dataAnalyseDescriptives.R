@@ -6,14 +6,28 @@ descriptiveStatisticsAsFactorVar <- function(dtaObj,factorVariablesNames){
     for( var in factorVariablesNames){
         varObj <- dtaObj[[var]];
 
-
+        
         tblFactorOfVarObj <- table(varObj);
         #order(tblFactorOfVarObj$varObj);
         tblFactorOfVarObj <- transform(
             tblFactorOfVarObj,
-            relPerc = prop.table(Freq),
-            cumFreq = cumsum(Freq))
+            relPerc = prop.table(Freq),        
+            cumFreq = cumsum(Freq),
+            cumRelPerc = cumsum(prop.table(Freq))
+        )
+                      
+        ##message("tblFactorOfVarObj");
+        ##tblFactorOfVarObj <- addmargins(
+        ##    dtaTableForRowMargin,
+        ##    table(tblFactorOfVarObj$Freq),FUN = sum,1);
+        #tblFactorOfVarObj <- addmargins(
+        #    tblFactorOfVarObj,
+        #    margin = seq_along(dim(tblFactorOfVarObj)),
+        #    FUN = sum, quiet = FALSE);
+        
+        ##tblFactorOfVarObj <- addmargins(table(tblFactorOfVarObj$Freq),2);
 
+        
         ##varObj.freq.AsFrame =  as.data.frame(varObj.freq);
         #varObj.freq.AsFrame =  table(varObj);
 

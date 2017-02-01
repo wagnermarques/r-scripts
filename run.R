@@ -106,29 +106,35 @@ twoArgHandle <- function(args){
         ##readData function dont default ones
         ##Be carefull the select values for colum names to be read is case sensitive
         colNamesToReadVector <- c(
-            "rm"  ,
-            "nomecurso" ,
-            "tipocurso",
-            "Periodo",
-            "ano",
-            "semestreevasao",
-            "anoevasao");
+                                  "rm"  ,
+                                  "nomecurso" ,
+                                  "tipocurso",
+                                  "Periodo",
+                                  "ano",
+                                  "semestreevasao",
+                                  "anoevasao",
+                                  "motivo"
+                                  );
         ColTypes <- list(
-            rm="integer",
-            nomecurso="factor",
-            tipocurso="factor",
-            Periodo="factor",
-            ano="integer",
-            semestreevasao="factor",
-            anoevasao="integer");
+                         rm="integer",
+                         nomecurso="factor",
+                         tipocurso="factor",
+                         Periodo="factor",
+                         ano="integer",
+                         semestreevasao="factor",
+                         anoevasao="integer",
+                         motivo="factor");
+        
         colNameLabels <- list(
-            rm="matricula",
-            nomecurso="Curso",
-            tipocurso="Tipo do Curso",
-            Periodo="Periodo",
-            ano="Ano do Curso Evadido",
-            semestreevasao="Semestre do Curso Evadido",
-            anoevasao="Ano Da Evasao");
+                              rm="matricula",
+                              nomecurso="Curso",
+                              tipocurso="Tipo do Curso",
+                              Periodo="Periodo",
+                              ano="Ano do Curso Evadido",
+                              semestreevasao="Semestre do Curso Evadido",
+                              anoevasao="Ano Da Evasao",
+                              motivo="Motivo"
+                              );
 
         Freq <- list(
             "anoevasao"
@@ -166,11 +172,12 @@ twoArgHandle <- function(args){
         descriptiveStatisticsAsFactorVar(
             dtaObj=tbl,
             factorVariablesNames=c(
-                "anoevasao",
-                "nomecurso",
-                "tipocurso",
-                "Periodo",
-                "semestreevasao"));
+              "anoevasao",
+              "nomecurso",
+              "tipocurso",
+              "Periodo",
+              "semestreevasao",
+              "motivo"));
         #descriptiveStatisticsForNumericVar
         
         #system(cmd_pdflatext_for_tex_fragment(xtableGeneratedLatexFileName));
