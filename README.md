@@ -6,7 +6,6 @@ The firt goal is to provide some descriptive statistics with nice
 outputs using xtable.
 
 
-
 ## Installation
 
 git clone https://github.com/wagnermarques/r-scripts.git
