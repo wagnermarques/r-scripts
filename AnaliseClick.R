@@ -12,18 +12,12 @@ dados
 # las=3 -> legendas sempre na vertical
 par(las=1)
 
-
-
 # cex tamanho das fontes 
 par(cex=1)
-
-
 
 # par(mfrow=c()) controla “quantas figuras” serão desenhadas dentro de um mesmo dispositivo
 # linhs , colunas
 par(mfrow=c(1,1))
-
-
 
 #par(mar=c()) controla o “tamanho das margens do dispositivo (pdf ou img)
 # 1° numero controla a margem da parte de baixo do gráfico, 
@@ -32,71 +26,95 @@ par(mfrow=c(1,1))
 # 4° numero controla o tamanho da margem do lado direito do gráfico. 
 par(mar=c(8,5,2,6))
 
-
-
 #Grafico de barras
 #se o arquivo dde dados tem x registros de jogadas, 
 # esse vetor vem com uma numeracao de 1 a x onde x é a contagem dos registros de jogadas
 # esse vetor é interessantes sempre que em gráficos queremos mostrar em qual jogada, por exemplo o dados se refere
 cSeqDeJogasNumeradas <- c(seq(1,nrow(dados),by=1))
 
-#cria grafico de barras
-xx <- barplot(
-	dados$tempo_total, # dados do grafico
-	#main="Tempo Total", #titulo do grafico
-	#xlab="Tempo Total em segundos" , #rotulo do eixo x
-	#ylab="N. de Jogadas", #rotulo do eixo y
-	#names.arg=cSeqDeJogasNumeradas, #nomeia cada uma das barras com o numero de jogadas
-	horiz=T) #torna o graf horizontal
-
-title(
-	main="Tempo Total de Cada Jogada", col.main="blue", 
- 	sub="Tempo Total para todos os 4 objetos", col.sub="blue", 
- 	xlab="Tempo Total em segundos", 
-	ylab="N. da Jogadas",
-	col.lab="red", #Cor do label dos eixos 
-	cex.lab=0.75) 
-
-# Escreve rotulo dos valores	
-text(
-	y = xx, 
- 	x = dados$tempo_total, 
- 	label = format(round(dados$tempo_total, 3), nsmall = 3), 
- 	pos = NULL, 
- 	cex = 0.8, #tamanho da fonte do rotulo 
- 	col = "red")
-#box();
-
-
-
-
-#histograma todos os alunos
-hist(dados$tempo_total,
-	 main="Histograma: Tempo total",
-	 freq=F, #eixo x mostra probabilidade ao inves de frequencia
-	 xlab="Tempo total",
-	 ylab="Propabilidade")
-lines(
-	density(dados$tempo_total), 
-	col=2, #cor
-	lwd=4) #Line width
-title(
- 	sub="Tempo Total para todos os 4 objetos", col.sub="blue", 
-	col.lab="red", #Cor do label dos eixos 
-	cex.lab=0.75) 
-
-
-
-
+criaGraficoDeBarras <- function(variavel){
+	#cria grafico de barras
+	xx <- barplot(
+		variavel, # dados do grafico
+		#main="Tempo Total", #titulo do grafico
+		#xlab="Tempo Total em segundos" , #rotulo do eixo x
+		#ylab="N. de Jogadas", #rotulo do eixo y
+		#names.arg=cSeqDeJogasNumeradas, #nomeia cada uma das barras com o numero de jogadas
+		horiz=T) #torna o graf horizontal
 	
-	#Dispersão dos valores
-#boxplot
+	title(
+		main="Tempo Total de Cada Jogada", col.main="blue", 
+		sub="Tempo Total para todos os 4 objetos", col.sub="blue", 
+		xlab="Tempo Total em segundos", 
+		ylab="N. da Jogadas",
+		col.lab="red", #Cor do label dos eixos 
+		cex.lab=0.75) 
+	
+	# Escreve rotulo dos valores	
+	text(
+		y = xx, 
+		x = variavel, 
+		label = format(round(variavel, 3), nsmall = 3), 
+		pos = NULL, 
+		cex = 0.8, #tamanho da fonte do rotulo 
+		col = "red")
+	#box();
+}
 
-#Na caixa temos 50% dos dados segundo e terceiro quartil
-#Linhas paralelas que determinam o primeiro quartil (valor mínimo até o segundo quartil)
-## Add text at top of bars
-boxplot(dados$tempo_total ~ dados$nome, ylab="Tempo Total" , xlab="jogadores")
-box()
+
+criaHitograma <- function(variavel){
+	#histograma todos os alunos
+	hist(variavel,
+		main="Histograma: Tempo total",
+		freq=F, #eixo x mostra probabilidade ao inves de frequencia
+		xlab="Tempo total",
+		ylab="Propabilidade")
+	lines(
+		density(variavel), 
+		col=2, #cor
+		lwd=4) #Line width
+	title(
+		sub="Tempo Total para todos os 4 objetos", col.sub="blue", 
+		col.lab="red", #Cor do label dos eixos 
+		cex.lab=0.75) 
+}
+
+
+criaBoxPlotsEmUmMesmoGraficoParaTodosOsJogadores <- function(variavel){
+	#Dispersão dos valores
+	#boxplot
+	
+	#Na caixa temos 50% dos dados segundo e terceiro quartil
+	#Linhas paralelas que determinam o primeiro quartil (valor mínimo até o segundo quartil)
+	## Add text at top of bars
+	boxplot(variavel ~ dados$nome, ylab="Tempo Total" , xlab="jogadores")
+	box()
+}
+
+#ANALISE DOS JOGADORES COM RELACAO AO TEMPO TOTAL
+criaGraficoDeBarras(dados$tempo_total) 
+criaHitograma(dados$tempo_total)
+criaBoxPlotsEmUmMesmoGraficoParaTodosOsJogadores(dados$tempo_total)
+
+par(mfrow=c(2,2))
+#ANALISE DOS JOGADORES COM RELACAO AS FIGURAS ESPECIFICAS
+criaGraficoDeBarras(dados$cilindro) 
+criaGraficoDeBarras(dados$esfera)
+criaGraficoDeBarras(dados$cubo)
+criaGraficoDeBarras(dados$capsula)
+
+criaHitograma(dados$cilindro)
+criaHitograma(dados$esfera)
+criaHitograma(dados$cubo)
+criaHitograma(dados$capsula)
+
+
+criaBoxPlotsEmUmMesmoGraficoParaTodosOsJogadores(dados$cilindro)
+criaBoxPlotsEmUmMesmoGraficoParaTodosOsJogadores(dados$esfera)
+criaBoxPlotsEmUmMesmoGraficoParaTodosOsJogadores(dados$cubo)
+criaBoxPlotsEmUmMesmoGraficoParaTodosOsJogadores(dados$capsula)
+
+
 
 
 graficosLinearEvolucaoDoTempoTotal <- function(){
